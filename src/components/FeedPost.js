@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import likeImage from "../../assets/images/like.png";
 import {
@@ -24,6 +25,7 @@ const post = {
 };
 
 const FeedPost = ({ post }) => {
+  const [isLiked, setIsLiked] = useState(false);
   return (
     <View style={styles.post}>
       {/* header */}
@@ -66,10 +68,21 @@ const FeedPost = ({ post }) => {
         </View>
         <View style={styles.StatsBottom}>
           <View style={styles.footerIcons}>
-            <TouchableOpacity>
-              <AntDesign name="like2" size={18} style={styles.icon__footer} />
+            <TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
+              <AntDesign
+                name="like2"
+                size={18}
+                color={isLiked ? "#1B3FAB" : "grey"}
+              />
             </TouchableOpacity>
-            <Text style={styles.iconText}>Like</Text>
+            <Text
+              style={[
+                styles.iconText,
+                { color: isLiked ? "royalblue " : "grey" },
+              ]}
+            >
+              Like
+            </Text>
           </View>
           <View style={styles.footerIcons}>
             <TouchableOpacity>
@@ -172,10 +185,9 @@ const styles = StyleSheet.create({
   iconText: {
     fontSize: 12,
     color: "grey",
+    marginLeft: 5,
   },
   icon__footer: {
-    color: "grey",
-
     marginRight: 5,
   },
 });
