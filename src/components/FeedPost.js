@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import likeImage from "../../assets/images/like.png";
 import {
   Entypo,
@@ -7,6 +14,7 @@ import {
   FontAwesome5,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const post = {
   id: "p1",
@@ -25,11 +33,15 @@ const post = {
 };
 
 const FeedPost = ({ post }) => {
+  const navigation = useNavigation();
   const [isLiked, setIsLiked] = useState(false);
   return (
     <View style={styles.post}>
       {/* header */}
-      <View style={styles.header}>
+      <Pressable
+        style={styles.header}
+        onPress={() => navigation.navigate("Profile", { id: post.User.id })}
+      >
         <Image
           source={{ uri: post.User.image }}
           style={styles.profileImage}
@@ -46,7 +58,7 @@ const FeedPost = ({ post }) => {
           color="black"
           style={styles.icon}
         />
-      </View>
+      </Pressable>
       {/* body */}
       <View style={styles.body}>
         {/* conditional rendering of description & image using the && operator */}

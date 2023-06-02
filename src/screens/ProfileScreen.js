@@ -15,7 +15,7 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import UpdateProfileScreen from "./UpdateProfileScreen";
+// import UpdateProfileScreen from "./UpdateProfileScreen";
 
 const user = {
   id: "u1",
@@ -29,7 +29,10 @@ const user = {
 
 const ProfileScreen = () => {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation()
+  const EditPost = () => {
+    navigation.navigate('EditPost')
+  }
   return (
     <View style={styles.container}>
       <View style={styles.profileBg}>
@@ -44,7 +47,7 @@ const ProfileScreen = () => {
           <Ionicons name="add-circle" size={22} color="#fff" />
           <Text style={styles.btnText}>Add to Story</Text>
         </View>
-        <Pressable style={styles.btn2} onPress={() => navigation.navigate('UpdateProfile')}>
+        <Pressable style={styles.btn2} onPress={() => navigation.navigate("Update Profile")}>
           <EvilIcons name="pencil" size={24} color="black" />
           <Text style={styles.btnText2}>Edit Profile</Text>
         </Pressable>

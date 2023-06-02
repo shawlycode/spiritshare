@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, Image, TextInput, Button } from "react-native";
 import { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Entypo } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const user = {
   id: "u1",
@@ -11,13 +12,17 @@ const user = {
 };
 
 const CreatePostScreen = () => {
+  const navigation = useNavigation();
   const [description, setDescription] = useState(" ");
   const [image, setImage] = useState(null);
   const onSubmit = () => {
-    console.warn("Post", description);
+    // console.warn("Post", description);
     setDescription("");
+    navigation.goBack();
   };
-
+  const Profile = () => {
+    console.warn("profile page");
+  };
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -33,6 +38,7 @@ const CreatePostScreen = () => {
       setImage(result.assets[0].uri);
     }
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -40,6 +46,7 @@ const CreatePostScreen = () => {
           source={{ uri: user.profileImage }}
           style={styles.profileImage}
         />
+
         <Text style={styles.name}>{user.name}</Text>
         <Entypo
           name="images"
